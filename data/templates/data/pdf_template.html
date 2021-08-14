@@ -1,0 +1,65 @@
+<html>
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+
+            @frame header_frame {
+                /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 40pt;
+            }
+
+            @frame content_frame {
+                /* Content Frame */
+                left: 50pt;
+                width: 512pt;
+                top: 90pt;
+                height: 632pt;
+            }
+
+            @frame footer_frame {
+                /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt;
+                width: 512pt;
+                top: 772pt;
+                height: 20pt;
+            }
+        }
+    </style>
+    <title>Cetak Laporan</title>
+</head>
+
+<body>
+    <center><h1>LAPORAN SPP SISWA</h1></center>
+<table border="1">
+    <thead>
+        <tr>
+            <th><br> No.</th>
+            <th>NISN</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>SPP Lunas</th>
+            <th>SPP Belum Lunas</th>
+        </tr>   
+    </thead>
+    <tbody>
+    {% for laporan in laporan %}
+    <tr height="200px">
+        <td align="center"><br>{{ forloop.counter }}</td>
+        <td align="center">{{laporan.sppsiswa__siswa__nisn}}</td>
+        <td align="center">{{laporan.sppsiswa__siswa__nama}}</td>
+        <td align="center">{{laporan.sppsiswa__siswa__namakls__namakls}}</td>
+        <td align="center">{{laporan.sppsiswa__lunas_count}} Bulan</td>
+        <td align="center">{{laporan.not_sppsiswa__lunas_count}} Bulan</td>
+    </tr>  
+    {% endfor %}
+    </tbody>    
+</table>
+</body>
+
+</html>

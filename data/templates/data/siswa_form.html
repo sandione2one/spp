@@ -1,0 +1,15 @@
+{% extends "data/main2.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+<div class="card shadow mb-4">
+    <div class="card card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </form>
+    </div>
+</div>
+{% endblock content %}

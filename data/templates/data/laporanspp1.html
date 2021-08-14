@@ -1,0 +1,51 @@
+{% extends "data/main2.html" %}
+{% load humanize %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 150px;
+    }
+</style>
+<!-- DataTales Example -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+
+    <div class="card shadow mb-4">
+        <div class="card card-body">
+            <h4>Laporan SPP Siswa</h4>
+            <a href="" class="right btn btn-outline-info">Cetak</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="10%">NIS</th>
+                            <th width="30%">Nama Siswa</th>
+                            <th width="10%">Kelas</th>
+                            <th width="15%">SPP Bulan</th>
+                            <th width="15%">Tgl Bayar</th>
+                            <th width="15%">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for Lapsis in items %}
+                        <tr>
+                            <td>{{Lapsis.sppsiswa.siswa.nisn}}</td>
+                            <td>{{Lapsis.sppsiswa.siswa.nama}}</td>
+                            <td>{{Lapsis.sppsiswa.siswa.namakls}}</td>
+                            <td>{{Lapsis.spp.bulan}}</td>
+                            <td>{{Lapsis.date}}</td>
+                            <td>{{Lapsis.sppsiswa.lunas}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

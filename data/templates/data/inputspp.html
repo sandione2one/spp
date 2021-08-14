@@ -1,0 +1,54 @@
+{% extends "data/main2.html" %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 150px;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    
+</script>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card card-body">
+        <h4>Input SPP Siswa</h4>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="10%">Pilih</th>
+                        <th width="20%">NIS</th>
+                        <th width="40%">NAMA</th>
+                        <th width="15%">KELAS</th>
+                        <th width="15%">SPP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form method="post">
+                        {% csrf_token %}
+                    {% for Kelassiswa in siswa %}
+                    <tr>
+                        <td><input type="checkbox" name="cekbox" value="{{ Kelassiswa.nama.nis }}{{ Kelassiswa.nama.nama }}{{ Kelassiswa.namakls.namakls }}{{ Kelassiswa.namakls.spp }}" class="cekvalue" ></td>
+                        <td><input type="text" name="nis" id="nis" value="{{ Kelassiswa.nama.nis }}" readonly /></td>
+                        <td><input type="text" name="nama" id="nama" value="{{ Kelassiswa.nama.nama }}" readonly /></td>
+                        <td><input type="text" name="namakls" id="kls" value="{{ Kelassiswa.namakls.namakls }}" readonly /></td>
+                        <td><input type="text" name="spp" id="spp" value="{{ Kelassiswa.namakls.spp }}" readonly /></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <input type="checkbox" id="bulan" name="bulan" value="Januari">
+                <input type="checkbox" id="status" name="status" value="LUNAS">
+                
+                <input type="submit" value="Generate"/>
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

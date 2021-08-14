@@ -1,0 +1,46 @@
+{% extends "data/main2.html" %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 150px;
+    }
+</style>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card card-body">
+        <h4>Data Siswa</h4>
+        <a href="{% url 'tambah_siswa' %}" class="right btn btn-outline-info">Tambah Siswa</a>
+    </div>
+    <form method="get">
+        {{ filter_data_siswa.form }}
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="20%">NIS</th>
+                        <th width="35%">NAMA</th>
+                        <th width="25%">KELAS</th>
+                        <th width="20%">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for datasiswa in Siswa %}
+                    <tr>
+                        <td>{{ datasiswa.nis }}</td>
+                        <td>{{ datasiswa.nama }}</td>
+                        <td>{{ datasiswa.idkls }}</td>
+                        <td><a href="{% url 'ubah_siswa' datasiswa.id %}" class="btn btn-success">Ubah</a> |
+                            <a href="{% url 'hapus_siswa' datasiswa.id %}" class="btn btn-danger">Hapus</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

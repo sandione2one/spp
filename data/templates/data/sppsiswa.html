@@ -1,0 +1,74 @@
+{% extends "data/main2.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 200px;
+    }
+</style>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                    <div class="card card-body">
+                        <h4>Data Permintaan Pembayaran Siswa</h4><a href="{% url 'tambah_sppsiswa' %}" class="right btn btn-info btn-skew">Tambah SPP Siswa</a>
+                    </div>
+                        <div class="card-body">
+                            <form method="get" align="left">
+                                <div class="row">
+                                    <div class="col">
+                                        Nama : {{ MyFilter.form.siswa | add_class:"form-control" }}
+                                    </div>
+                                    <div class="col mt-3">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form><br>
+                            <div class="table-responsive">
+                                {% if pesan %}
+                                <div class="alert alert-success">{{ pesan }}</div>
+                                {% endif %}
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="20%">SISWA</th>
+                                            <th width="15%">STATUS</th>
+                                            <th width="35%">URL</th>
+                                            <th width="30%">AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for sppsiswa in Sppsiswa %}
+                                        <tr>
+                                            <td>{{ sppsiswa.siswa.nisn }} {{ sppsiswa.siswa.nama }}</td>
+                                            <td>{{ sppsiswa.lunas }}</td>
+                                            <td>{{ sppsiswa.url }}</td>
+                                            <td><a href="{% url 'ubah_sppsiswa' sppsiswa.id %}" class="btn btn-success">Ubah</a> | 
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapus-{{ sppsiswa.id }}">Hapus</button>
+                                        </tr>
+                                            <div class="modal fade" id="hapus-{{ sppsiswa.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda Yakin ingin menghapus {{ sppsiswa.siswa.nisn }} {{ sppsiswa.siswa.nama }} ?
+                                                        </div>
+                                                            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <a href="{% url 'hapus_sppsiswa' sppsiswa.id %}" class="btn btn-danger">Hapus</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                             </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+{% endblock content %}

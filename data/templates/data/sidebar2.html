@@ -1,0 +1,148 @@
+{% load static %}
+<nav class="pcoded-navbar">
+    <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+    <div class="pcoded-inner-navbar main-menu">
+        <div class="">
+            <div class="main-menu-header">
+                <img class="img-40 img-radius" src="{% static 'images/avatar-4.jpg' %}" alt="User-Profile-Image">
+                <div class="user-details">
+                    <span>{{ request.user }}</span>
+                    <span id="more-details">Detail<i class="ti-angle-down"></i></span>
+                </div>
+            </div>
+
+            <div class="main-menu-content">
+                <ul>
+                    <li class="more-details">
+                        <a href="#"><i class="ti-user"></i>View Profile</a>
+                        <a href="{% url 'logout' %}"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% if request.user.is_staff %}
+        <ul class="pcoded-item pcoded-left-item">
+            <li class=" ">
+                <a href="{% url 'home' %}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                    <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Data Master</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{% url 'siswa' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Data Siswa</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{% url 'kelas' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Data Kelas</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{% url 'kelassiswa' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Kelas Siswa</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+        <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Data SPP</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-briefcase"></i><b>FC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">SPP Siswa</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{% url 'spp' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">SPP</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{% url 'sppsiswa' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Pembayaran</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{% url 'laporsppsiswa' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Laporan</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+        </ul>
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="pcoded-hasmenu">
+                <a href="{% url 'petugas' %}">
+                    <span class="pcoded-micon"><i class="ti-user"></i><b>FC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Petugas</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        
+        </ul>
+        {% else %}
+        {% if user.is_authenticated %}
+        <ul class="pcoded-item pcoded-left-item">
+            <li class=" ">
+                <a href="{% url 'siswapage' %}">
+                    <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="pcoded-hasmenu">
+                <a href="javascript:void(0)">
+                    <span class="pcoded-micon"><i class="ti-briefcase"></i><b>FC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">SPP Siswa</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" ">
+                        <a href="{% url 'sppsis' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Pembayaran</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{% url 'laporsppsis' %}">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Laporan</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+        
+                </ul>
+            </li>
+        
+        </ul>
+        {% endif %}
+        {% endif %}
+    </div>
+</nav>

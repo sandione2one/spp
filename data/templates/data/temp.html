@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Laporan
+{% endblock title %}
+
+{% block content %}
+{% for sppitem in object_list %}
+    {{sppitem.sppsiswa.siswa}}
+{% endfor %}
+{% endblock content %}

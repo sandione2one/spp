@@ -1,0 +1,42 @@
+{% extends "data/main2.html" %}
+{% load humanize %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 150px;
+    }
+</style>
+<div class="container-fluid">
+    <h5>Data SPP <b> </b></h5>
+    <div class="row">
+        <div class="col-md"><br>
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>No</th>
+                        <th>Bulan</th>
+                        <th>Tahun</th>
+                        <th>SPP</th>
+                        <th>Aksi</th>
+                    </tr>
+                    {% for spp in spp %}
+                    <tr>
+                        <!-- <form action="add"> -->
+                            <!-- {% csrf_token %} -->
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{spp.bulan}}</td>
+                            <td>{{spp.tahun}}</td>
+                            <td>Rp. {{spp.spp|intcomma}}</td>
+                            <td><button data-spp="{{spp.id}}" data-action="add" class="btn btn-info add-btn update-cart">Cart</button></td>
+                            
+                        <!-- </form> -->
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,136 @@
+{% extends "data/main2.html" %}
+{% load humanize %}
+{% block content %}
+{% load static %}
+
+<div class="page-wrapper">
+
+    <div class="page-body">
+        <div class="row">
+            <!-- card1 start -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card widget-card-1">
+                    <div class="card-block-small">
+                        <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                        <span class="text-c-blue f-w-600">SPP Lunas</span>
+                        <h4{% for jumlah in jumlah %}>Rp. {{jumlah.sppsiswa__lunas_count|intcomma}}{% endfor %}</h4>
+                        <div>
+                            <span class="f-left m-t-10 text-muted">
+                                <i>Total SPP Sudah Lunas</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 end -->
+            <!-- card1 start -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card widget-card-1">
+                    <div class="card-block-small">
+                        <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                        <span class="text-c-pink f-w-600">SPP Belum Lunas</span>
+                        <h4>{% for jumlah in jumlah %}Rp. {{jumlah.not_sppsiswa__lunas_count|intcomma}}{% endfor %}</h4>
+                        <div>
+                            <span class="f-left m-t-10 text-muted">
+                                <i>Total SPP Belum Lunas</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 end -->
+            <!-- card1 start -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card widget-card-1">
+                    <div class="card-block-small">
+                        <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
+                        <span class="text-c-green f-w-600">Jumlah Siswa</span>
+                        <h4>{{total_siswa}} Siswa</h4>
+                        <div>
+                        <span class="f-left m-t-10 text-muted">
+                            <i>Seluruh Siswa</i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 end -->
+            <!-- card1 start -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card widget-card-1">
+                    <div class="card-block-small">
+                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
+                        <span class="text-c-yellow f-w-600">Jumlah Kelas</span>
+                        <h4>{{total_kelas}} Kelas</h4>
+                        <div>
+                            <span class="f-left m-t-10 text-muted">
+                                <i>Seluruh Kelas</i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 end -->
+            <!-- Statestics Start -->
+            <div class="col-md-12 col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Statistik SPP</h5>
+                        <div class="card-header-left ">
+                        </div>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="icofont icofont-simple-left "></i></li>
+                                <li><i class="icofont icofont-maximize full-card"></i>
+                                </li>
+                                <li><i class="icofont icofont-minus minimize-card"></i>
+                                </li>
+                                <li><i class="icofont icofont-refresh reload-card"></i>
+                                </li>
+                                <li><i class="icofont icofont-error close-card"></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <!-- <div id="statestics-chart" style="height:517px;"></div> -->
+                        <div id="container"></div>
+                        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+                        <script src="https://code.highcharts.com/highcharts.src.js"></script>
+                        <script>
+                            Highcharts.chart('container', {
+                                chart: {
+                                    type: 'column'
+                                },
+                                title: {
+                                    text: 'Grafik SPP Siswa'
+                                },
+                                xAxis: {
+                                    categories: [
+                                        {% for entry in jumlah1 %}'{{ entry.spp__bulan }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+                                    ]
+                                },
+                                series: [{
+                                    name: 'Lunas',
+                                    data: [
+                                         {% for entry in jumlah1 %}{{ entry.sppsiswa__lunas_count }}{% if not forloop.last %}, {% endif %} {% endfor %}
+                                    ]
+                                }, {
+                                    name: 'Belum Lunas',
+                                    data: [
+                                          {% for entry in jumlah1 %}{{ entry.not_sppsiswa__lunas_count }} {% if not forloop.last %}, {% endif %} {% endfor %}
+                                    ]
+                                }]
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

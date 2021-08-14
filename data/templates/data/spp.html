@@ -1,0 +1,89 @@
+{% extends "data/main2.html" %}
+{% load humanize %}
+{% block content %}
+<style type="text/css">
+    .right {
+        position: absolute;
+        right: 2%;
+        width: 150px;
+    }
+</style>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                    <div class="card card-body">
+                        <h4>{{judul}}</h4>
+                        <a href="{% url 'tambah_spp' %}" class="right btn btn-info btn-skew">Tambah SPP</a>
+                    </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="25%">Kelas</th>
+                                            <th width="30%">SPP</th>
+                                            <th width="15%">Bulan</th>
+                                            <th width="10%">Tahun</th>
+                                            <th width="20%">AKSI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for dataspp in halaman_spp.object_list %}
+                                        <tr>
+                                            <td>{{ dataspp.kelas.namakls }}</td>
+                                            <td>Rp. {{ dataspp.spp|intcomma }}</td>
+                                            <td>{{ dataspp.bulan }}</td>
+                                            <td>{{ dataspp.tahun }}</td>
+                                            <td><a href="{% url 'ubah_spp' dataspp.id %}" class="btn btn-success btn-skew">Ubah</a>
+                                                <button type="button" class="btn btn-danger btn-skew" data-toggle="modal" data-target="#hapus-{{ dataspp.id }}">Hapus</button>
+                                        </tr>
+                                            <div class="modal fade" id="hapus-{{ dataspp.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda Yakin ingin menghapus {{ dataspp.kelas.namakls }}, {{ dataspp.bulan }} ?
+                                                        </div>
+                                                            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <a href="{% url 'hapus_spp' dataspp.id %}" class="btn btn-danger">Hapus</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                             </tbody>
+                                </table>
+                                <hr />
+                                <nav>
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item {% if not previous %} disabled {% endif %}">
+                                            <a class="page-link" href="{{ previous }}">Previous</a>
+                                        </li>
+                                        {% for n in halaman_spp.paginator.page_range %}
+                                        {% if halaman_spp.number == n %}
+                                        <li class="page-item active" aria>
+                                            <span class="page-link">
+                                                {{ n }}
+                                                <span class="sr-only">(current)</span>
+                                            </span>
+                                        </li>
+                                        {% elif n > halaman_spp.number|add:-3 and n < halaman_spp.number|add:3 %}
+                                        <li class="page-item {% if not next %} disabled {% endif %}">
+                                            <a class="page-link">{{ n }}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{{ next }}">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+{% endblock content %}
